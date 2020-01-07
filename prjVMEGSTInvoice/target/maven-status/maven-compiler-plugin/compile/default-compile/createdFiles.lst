@@ -1,0 +1,7 @@
+com\sap\document\sap\soap\functions\mc_style\ZsdrfcDealerPlantResponse.class
+com\sap\document\sap\soap\functions\mc_style\ZSDRFCDEALERPLANT.class
+com\sap\document\sap\soap\functions\mc_style\ZSDRFCDEALERPLANT_Service.class
+com\sap\document\sap\soap\functions\mc_style\package-info.class
+com\sap\document\sap\soap\functions\mc_style\ZsdrfcDealerPlant_Type.class
+com\sap\document\sap\soap\functions\mc_style\ObjectFactory.class
+org\mycompany\Application.class

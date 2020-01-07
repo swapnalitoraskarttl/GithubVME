@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="          http://www.springframework.org/schema/beans           http://www.springframework.org/schema/beans/spring-beans.xsd            http://camel.apache.org/schema/cxf           http://camel.apache.org/schema/cxf/camel-cxf.xsd                http://camel.apache.org/schema/spring                 http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <!-- setting up a Camel CXF web-service -->
+    <cxf:cxfEndpoint address="http://localhost:8089/ZSDRFC_DEALER_PLANT"
+        id="SAPVMEGSTInv"
+        serviceClass="com.sap.document.sap.soap.functions.mc_style.ZSDRFCDEALERPLANT" wsdlURL="SAPVMEGSTInvoice.wsdl">
+        <cxf:properties>
+            <entry key="dataFormat" value="MESSAGE"/>
+        </cxf:properties>
+    </cxf:cxfEndpoint>
+    <!-- SAP Generation CXF Endpoint -->
+    <cxf:cxfEndpoint
+        address="http://6m252.pune.telco.co.in:8000/sap/bc/srt/rfc/sap/zsdrfc_dealer_plant/250/zsdrfc_dealer_plant/zsdrfc_dealer_plant"
+        id="SAPVMEGSTgeneration" wsdlURL="SAPVMEGSTInvActual.wsdl">
+        <cxf:properties>
+            <entry key="dataFormat" value="MESSAGE"/>
+        </cxf:properties>
+    </cxf:cxfEndpoint>
+    <camelContext id="camel" streamCache="true"
+        xmlns="http://camel.apache.org/schema/spring" xmlns:urn="urn:sap-com:document:sap:soap:functions:mc-style">
+        <!-- Register CreditExpo Route -->
+        <route id="SAPVMEGSTInv1">
+            <from id="_from1" uri="cxf:bean:SAPVMEGSTInv?loggingFeatureEnabled=true"/>
+            <log id="_log1" message="******** REQUEST BODY ********* ${body}"/>
+            <log id="_log10" message="******** REQUEST BODY1 ********* ${body}"/>
+            <setHeader headerName="Dealer" id="_setHeader1">
+                <xpath resultType="java.lang.String">//urn:ZsdrfcDealerPlant/Dealer/text()</xpath>
+            </setHeader>
+            <setHeader headerName="Plant" id="_setHeader2">
+                <xpath resultType="java.lang.String">//urn:ZsdrfcDealerPlant/Plant/text()</xpath>
+            </setHeader>
+            <choice id="_choice1">
+                <when id="_when1">
+                    <simple>${header.Dealer} == ''</simple>
+                    <setHeader headerName="Dealer" id="_setHeader10">
+                        <constant>Sonal</constant>
+                    </setHeader>
+                </when>
+                <otherwise id="_otherwise1">
+                    <setHeader headerName="Authorization" id="_setHeader2">
+                        <simple>Basic U0lFQkVMOklOVEVSTkVU</simple>
+                    </setHeader>
+                    <log id="_log2" message="******** REQUEST Send SAP ********* ${body}"/>
+                    <log id="_log20" message="******** REQUEST Send SAP2 ********* ${body}"/>
+                    <to id="_to1" uri="cxf:bean:SAPVMEGSTgeneration?defaultOperationName=ZsdrfcDealerPlant"/>
+                    <log id="_log2" message="******** REQUEST Processed ********* ${body}"/>
+                </otherwise>
+            </choice>
+        </route>
+    </camelContext>
+</beans>

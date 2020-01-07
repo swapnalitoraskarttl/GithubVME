@@ -1,0 +1,141 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:n1="urn:sap-com:document:sap:rfc:functions" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+<wsdl:documentation>
+<sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl"/>
+</wsdl:documentation>
+<wsdl:types>
+<xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+<xsd:simpleType name="char10">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="10"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char18">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="18"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char20">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="20"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char200">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="200"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char25">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="25"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char3">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="3"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char35">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="35"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char4">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="4"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char40">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="40"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="char70">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="70"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>
+<xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+<xsd:import namespace="urn:sap-com:document:sap:rfc:functions"/>
+<xsd:element name="ZsdrfcDealerPlant">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="Dealer" type="n0:char10"/>
+<xsd:element name="Plant" type="n0:char4"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="ZsdrfcDealerPlantResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="DealerAdd" type="n0:char35"/>
+<xsd:element name="DealerAddr1" type="n0:char35"/>
+<xsd:element name="DealerAddr2" type="n0:char35"/>
+<xsd:element name="DealerAddr3" type="n0:char35"/>
+<xsd:element name="DealerCity" type="n0:char25"/>
+<xsd:element name="DealerCode" type="n0:char10"/>
+<xsd:element name="DealerGstin" type="n0:char18"/>
+<xsd:element name="DealerName" type="n0:char70"/>
+<xsd:element name="DealerPanNo" type="n0:char40"/>
+<xsd:element name="DealerPostalCode" type="n0:char10"/>
+<xsd:element name="DealerStateCode" type="n0:char3"/>
+<xsd:element name="DealerStateDesc" type="n0:char20"/>
+<xsd:element name="PlantAddr1" type="n0:char35"/>
+<xsd:element name="PlantAddr2" type="n0:char35"/>
+<xsd:element name="PlantAddr3" type="n0:char35"/>
+<xsd:element name="PlantAddress" type="n0:char200"/>
+<xsd:element name="PlantCity" type="n0:char25"/>
+<xsd:element name="PlantCode" type="n0:char4"/>
+<xsd:element name="PlantEccNo" type="n0:char35"/>
+<xsd:element name="PlantGstin" type="n0:char18"/>
+<xsd:element name="PlantName" type="n0:char70"/>
+<xsd:element name="PlantPostalCode" type="n0:char10"/>
+<xsd:element name="PlantStateCode" type="n0:char3"/>
+<xsd:element name="PlantStateDesc" type="n0:char20"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="ZsdrfcDealerPlant">
+<wsdl:part name="parameters" element="tns:ZsdrfcDealerPlant"/>
+</wsdl:message>
+<wsdl:message name="ZsdrfcDealerPlantResponse">
+<wsdl:part name="parameter" element="tns:ZsdrfcDealerPlantResponse"/>
+</wsdl:message>
+<wsdl:portType name="ZSDRFC_DEALER_PLANT">
+<wsdl:operation name="ZsdrfcDealerPlant">
+<wsdl:input message="tns:ZsdrfcDealerPlant"/>
+<wsdl:output message="tns:ZsdrfcDealerPlantResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ZSDRFC_DEALER_PLANT" type="tns:ZSDRFC_DEALER_PLANT">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="ZsdrfcDealerPlant">
+<soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZSDRFC_DEALER_PLANT:ZsdrfcDealerPlantRequest" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="ZSDRFC_DEALER_PLANT_soap12" type="tns:ZSDRFC_DEALER_PLANT">
+<wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="ZsdrfcDealerPlant">
+<wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZSDRFC_DEALER_PLANT:ZsdrfcDealerPlantRequest" style="document"/>
+<wsdl:input>
+<wsoap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<wsoap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="ZSDRFC_DEALER_PLANT">
+<wsdl:port name="ZSDRFC_DEALER_PLANT" binding="tns:ZSDRFC_DEALER_PLANT">
+<soap:address location="http://localhost:8089/ZSDRFC_DEALER_PLANT"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
